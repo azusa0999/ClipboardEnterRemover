@@ -18,6 +18,10 @@
 4. [중지] 버튼을 클릭 후 pdf 파일을 가져와 개행되어있는 문자열을 복사해본 후 다른 곳에 붙여넣기를 해보세요. 개행되어 있습니까?
 5. 다시 [시작하기] 버튼을 클릭 후 다시 pdf 파일에서 동일한 문자열을 복하해보세요. 개행이 모두 제거된 것을 확인해볼 수 있습니다.
 
+## 기타사항
+* 이 프로그램은 헤더의 종료버튼이 비활성화되어 있습니다. 종료하시려면 작업트레이(윈도우 하단바 우측 끝)에서 아이콘에 마우스를 대고 우측 클릭하여 메뉴에서 "exit"를 통해 종료시켜주세요.
+* 프로그램을 최소화하면 자동으로 프로그램을 보여지지 않게 합니다. 다시 보이려면 역시 작업트레이로 가셔서 아이콘에 마우스 우측 클릭하여 메뉴 "show"를 클릭하면 볼 수 있습니다.
+
 ## 링크
 * setup.exe 파일 다운받기 https://github.com/azusa0999/ClipboardEnterRemover/releases/download/untagged-dc49b5440e44a2905487/Release.zip
 * 실행파일 다운받기 (모든 파일을 다운로드 받고 실행하시면 됩니다) :https://github.com/azusa0999/ClipboardEnterRemover/tree/main/bin/Release/net6.0-windows
