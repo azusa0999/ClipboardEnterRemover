@@ -1,4 +1,6 @@
 # ClipboardEnterRemover 클립보드 엔터 제거 프로그램
+![screensh](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FvnWHH%2FbtrK6B9w0Ji%2FiuwbiZtbOuovqP0g1yGgv0%2Fimg.png)
+
 ## 프로그램의 목적
 해당 프로그램은 논문 등 pdf 파일에서 카피할 때 행변환(엔터) 때문에 불편한 사용자를 위해 클립보드 내부에서 자동으로 행변환 값을 제거해주는 프로그램입니다.
 저의 경우 영문 번역을 위해 pdf 파일에서 자주 복사해서 구글 번역기에 붙여넣기를 해왔는데, 이 pdf에 보이는 개행된대로 카피가 된 점이 너무 불편했습니다. 
