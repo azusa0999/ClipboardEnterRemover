@@ -28,24 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnClipboardGetText = new System.Windows.Forms.Button();
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.btnStart = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.tbxRemoveTagetVal = new System.Windows.Forms.TextBox();
             this.lbxLog = new System.Windows.Forms.ListBox();
             this.prbStatus = new System.Windows.Forms.ProgressBar();
+            this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
+            this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnClipboardGetText
+            // btnStart
             // 
-            this.btnClipboardGetText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnClipboardGetText.Location = new System.Drawing.Point(163, 235);
-            this.btnClipboardGetText.Name = "btnClipboardGetText";
-            this.btnClipboardGetText.Size = new System.Drawing.Size(163, 32);
-            this.btnClipboardGetText.TabIndex = 1;
-            this.btnClipboardGetText.Text = "시작하기";
-            this.btnClipboardGetText.UseVisualStyleBackColor = true;
+            this.btnStart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnStart.Location = new System.Drawing.Point(163, 399);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(359, 32);
+            this.btnStart.TabIndex = 1;
+            this.btnStart.Text = "시작하기";
+            this.btnStart.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
             // 
@@ -54,7 +60,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 81F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnClipboardGetText, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.btnStart, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.tbxRemoveTagetVal, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.lbxLog, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.prbStatus, 0, 2);
@@ -65,7 +71,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(329, 270);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(525, 434);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // label1
@@ -86,7 +92,7 @@
             this.tbxRemoveTagetVal.Location = new System.Drawing.Point(82, 3);
             this.tbxRemoveTagetVal.Name = "tbxRemoveTagetVal";
             this.tbxRemoveTagetVal.ReadOnly = true;
-            this.tbxRemoveTagetVal.Size = new System.Drawing.Size(244, 23);
+            this.tbxRemoveTagetVal.Size = new System.Drawing.Size(440, 23);
             this.tbxRemoveTagetVal.TabIndex = 3;
             this.tbxRemoveTagetVal.Text = "\\r;\\n;-\\r;-\\n";
             // 
@@ -98,39 +104,65 @@
             this.lbxLog.ItemHeight = 15;
             this.lbxLog.Location = new System.Drawing.Point(3, 33);
             this.lbxLog.Name = "lbxLog";
-            this.lbxLog.Size = new System.Drawing.Size(323, 196);
+            this.lbxLog.Size = new System.Drawing.Size(519, 360);
             this.lbxLog.TabIndex = 4;
             // 
             // prbStatus
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.prbStatus, 2);
             this.prbStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.prbStatus.Location = new System.Drawing.Point(3, 235);
+            this.prbStatus.Location = new System.Drawing.Point(3, 399);
             this.prbStatus.Name = "prbStatus";
             this.prbStatus.Size = new System.Drawing.Size(154, 32);
             this.prbStatus.TabIndex = 5;
+            // 
+            // contextMenuStrip
+            // 
+            this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showToolStripMenuItem,
+            this.exitToolStripMenuItem});
+            this.contextMenuStrip.Name = "contextMenuStrip";
+            this.contextMenuStrip.Size = new System.Drawing.Size(105, 48);
+            // 
+            // showToolStripMenuItem
+            // 
+            this.showToolStripMenuItem.Name = "showToolStripMenuItem";
+            this.showToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
+            this.showToolStripMenuItem.Text = "Show";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(329, 270);
+            this.ClientSize = new System.Drawing.Size(525, 434);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "클립보드 엔터 제거기";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private Button btnClipboardGetText;
+        private Button btnStart;
         private TableLayoutPanel tableLayoutPanel1;
         private Label label1;
         private TextBox tbxRemoveTagetVal;
         private ListBox lbxLog;
         private ProgressBar prbStatus;
+        private ContextMenuStrip contextMenuStrip;
+        private ToolStripMenuItem showToolStripMenuItem;
+        private ToolStripMenuItem exitToolStripMenuItem;
     }
 }

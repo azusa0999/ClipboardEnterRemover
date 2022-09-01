@@ -8,7 +8,7 @@ namespace ClipboardHelper
     internal class ClipboardMonitor
     {
         public delegate void OnClipboardChangeEventHandler(ClipboardFormat format, object data);
-        public static event OnClipboardChangeEventHandler OnClipboardChange;
+        public static event OnClipboardChangeEventHandler? OnClipboardChange;
         public enum Status {Start, Stop};
         public static Status MonitorStatus = Status.Stop;
         public static void Start()
@@ -32,13 +32,13 @@ namespace ClipboardHelper
         class ClipboardWatcher : Form
         {
             // static instance of this form
-            private static ClipboardWatcher mInstance;
+            private static ClipboardWatcher? mInstance;
 
             // needed to dispose this form
             static IntPtr nextClipboardViewer;
 
             public delegate void OnClipboardChangeEventHandler(ClipboardFormat format, object data);
-            public static event OnClipboardChangeEventHandler OnClipboardChange;
+            public static event OnClipboardChangeEventHandler? OnClipboardChange;
 
             // start listening
             public static void Start()
