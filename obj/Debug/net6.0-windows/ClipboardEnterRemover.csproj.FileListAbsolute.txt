@@ -1,0 +1,17 @@
+C:\Users\aiki6\source\repos\ClipboardEnterRemover\ClipboardEnterRemover\bin\Debug\net6.0-windows\ClipboardEnterRemover.exe
+C:\Users\aiki6\source\repos\ClipboardEnterRemover\ClipboardEnterRemover\bin\Debug\net6.0-windows\ClipboardEnterRemover.deps.json
+C:\Users\aiki6\source\repos\ClipboardEnterRemover\ClipboardEnterRemover\bin\Debug\net6.0-windows\ClipboardEnterRemover.runtimeconfig.json
+C:\Users\aiki6\source\repos\ClipboardEnterRemover\ClipboardEnterRemover\bin\Debug\net6.0-windows\ClipboardEnterRemover.dll
+C:\Users\aiki6\source\repos\ClipboardEnterRemover\ClipboardEnterRemover\bin\Debug\net6.0-windows\ClipboardEnterRemover.pdb
+C:\Users\aiki6\source\repos\ClipboardEnterRemover\ClipboardEnterRemover\obj\Debug\net6.0-windows\ClipboardEnterRemover.csproj.AssemblyReference.cache
+C:\Users\aiki6\source\repos\ClipboardEnterRemover\ClipboardEnterRemover\obj\Debug\net6.0-windows\ClipboardEnterRemover.MainForm.resources
+C:\Users\aiki6\source\repos\ClipboardEnterRemover\ClipboardEnterRemover\obj\Debug\net6.0-windows\ClipboardEnterRemover.csproj.GenerateResource.cache
+C:\Users\aiki6\source\repos\ClipboardEnterRemover\ClipboardEnterRemover\obj\Debug\net6.0-windows\ClipboardEnterRemover.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\aiki6\source\repos\ClipboardEnterRemover\ClipboardEnterRemover\obj\Debug\net6.0-windows\ClipboardEnterRemover.AssemblyInfoInputs.cache
+C:\Users\aiki6\source\repos\ClipboardEnterRemover\ClipboardEnterRemover\obj\Debug\net6.0-windows\ClipboardEnterRemover.AssemblyInfo.cs
+C:\Users\aiki6\source\repos\ClipboardEnterRemover\ClipboardEnterRemover\obj\Debug\net6.0-windows\ClipboardEnterRemover.csproj.CoreCompileInputs.cache
+C:\Users\aiki6\source\repos\ClipboardEnterRemover\ClipboardEnterRemover\obj\Debug\net6.0-windows\ClipboardEnterRemover.dll
+C:\Users\aiki6\source\repos\ClipboardEnterRemover\ClipboardEnterRemover\obj\Debug\net6.0-windows\refint\ClipboardEnterRemover.dll
+C:\Users\aiki6\source\repos\ClipboardEnterRemover\ClipboardEnterRemover\obj\Debug\net6.0-windows\ClipboardEnterRemover.pdb
+C:\Users\aiki6\source\repos\ClipboardEnterRemover\ClipboardEnterRemover\obj\Debug\net6.0-windows\ClipboardEnterRemover.genruntimeconfig.cache
+C:\Users\aiki6\source\repos\ClipboardEnterRemover\ClipboardEnterRemover\obj\Debug\net6.0-windows\ref\ClipboardEnterRemover.dll
