@@ -3,19 +3,19 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Runtime.InteropServices;
 
-namespace ClipboardHelper
+namespace ClipboardEnterRemover
 {
     internal class ClipboardMonitor
     {
         public delegate void OnClipboardChangeEventHandler(ClipboardFormat format, object data);
         public static event OnClipboardChangeEventHandler? OnClipboardChange;
-        public enum Status {Start, Stop};
+        public enum Status { Start, Stop };
         public static Status MonitorStatus = Status.Stop;
         public static void Start()
         {
             MonitorStatus = Status.Start;
             ClipboardWatcher.Start();
-            ClipboardWatcher.OnClipboardChange += (ClipboardFormat format, object data) =>
+            ClipboardWatcher.OnClipboardChange += (format, data) =>
             {
                 if (OnClipboardChange != null)
                     OnClipboardChange(format, data);

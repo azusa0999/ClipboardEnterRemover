@@ -1,0 +1,5 @@
+C:\Users\aiki6\source\repos\ClipboardEnterRemover\ClipboardEnterRemover\bin\publish\ClipboardEnterRemover.exe
+C:\Users\aiki6\source\repos\ClipboardEnterRemover\ClipboardEnterRemover\bin\publish\ClipboardEnterRemover.dll
+C:\Users\aiki6\source\repos\ClipboardEnterRemover\ClipboardEnterRemover\bin\publish\ClipboardEnterRemover.deps.json
+C:\Users\aiki6\source\repos\ClipboardEnterRemover\ClipboardEnterRemover\bin\publish\ClipboardEnterRemover.runtimeconfig.json
+C:\Users\aiki6\source\repos\ClipboardEnterRemover\ClipboardEnterRemover\bin\publish\ClipboardEnterRemover.pdb
