@@ -12,10 +12,14 @@
 * IDE : Visual Studio 2022
 
 ## 사용방법
-1. setup.exe으로 프로그램을 설치하거나 ClipboardEnterRemover.exe를 다운받아 클릭합니다.
+1. setup.exe으로 프로그램을 다운 받아 설치하거나 ClipboardEnterRemover.exe를 다운받아 클릭합니다.
 2. 하단의 [시작하기] 버튼을 클릭하면 버튼 텍스트가 [중지]로 바뀌고 버튼 우측의 프로그래스바가 활성화되어 실행중임을 알립니다. 이때부터 클립보드에서 엔터값을 제거하기 시작합니다. 
 3. 다시 [중지] 버튼을 클릭하면 클립보드 엔터값 제거 기능은 중지됩니다.
 4. [중지] 버튼을 클릭 후 pdf 파일을 가져와 개행되어있는 문자열을 복사해본 후 다른 곳에 붙여넣기를 해보세요. 개행되어 있습니까?
 5. 다시 [시작하기] 버튼을 클릭 후 다시 pdf 파일에서 동일한 문자열을 복하해보세요. 개행이 모두 제거된 것을 확인해볼 수 있습니다.
+
+## 링크
+* setup.exe 파일 다운받기 https://github.com/azusa0999/ClipboardEnterRemover/releases/download/untagged-dc49b5440e44a2905487/Release.zip
+* 실행파일 다운받기 (모든 파일을 다운로드 받고 실행하시면 됩니다) :https://github.com/azusa0999/ClipboardEnterRemover/tree/main/bin/Release/net6.0-windows
 
 -끝-
