@@ -23,7 +23,7 @@
 * 프로그램을 최소화하면 자동으로 프로그램을 보여지지 않게 합니다. 다시 보이려면 역시 작업트레이로 가셔서 아이콘에 마우스 우측 클릭하여 메뉴 "show"를 클릭하면 볼 수 있습니다.
 
 ## 링크
-* setup.exe 파일 다운받기 https://github.com/azusa0999/ClipboardEnterRemover/releases/download/untagged-dc49b5440e44a2905487/Release.zip
+* setup.exe 파일 다운받기 https://github.com/azusa0999/ClipboardEnterRemover/releases/download/v1.0.0/Release.zip
 * 실행파일 다운받기 (모든 파일을 다운로드 받고 실행하시면 됩니다) :https://github.com/azusa0999/ClipboardEnterRemover/tree/main/bin/Release/net6.0-windows
 
 -끝-
