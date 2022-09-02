@@ -45,7 +45,8 @@
 * 윈도우 시작 시 자동시작하게 하는 기능은 귀찮아서 못햇씁니다. 혹시 필요하신 분이 있다면 윈도우 10에서 시작프로그램을 수동으로 설정하는 방법을 구글링 해보시기 바랍니다.
 
 ## 링크
-* setup.exe 파일 : [다운받기](https://github.com/azusa0999/ClipboardEnterRemover/releases/download/v1.0.0/Release.zip)
+* setup.exe 파일(v1.0.0) : [다운받기](https://github.com/azusa0999/ClipboardEnterRemover/releases/download/v1.0.0/Release.zip)
+* setup.exe 파일(v1.0.1) : [다운받기](https://github.com/azusa0999/ClipboardEnterRemover/releases/download/v1.0.0/Release_v1.0.1.zip)
 * 실행파일 모음 : [찾아가기](https://github.com/azusa0999/ClipboardEnterRemover/tree/main/bin/Release/net6.0-windows) (모든 파일을 다운로드 받고 실행하시면 됩니다)
 
 ## 푸념
