@@ -3,23 +3,7 @@ using System.Runtime.InteropServices;
 namespace ClipboardEnterRemover
 {
     public partial class MainForm : Form
-    {
-        static readonly string[] _RemoveTaget = {"\r","\n","-\r","-\n"};
-        
-        /// <summary>
-        /// 제거기 자신이 관리하는 클립보드 저장 데이터
-        /// </summary>
-        struct ClipboardData
-        {
-            /// <summary>
-            /// 원본 클립보드 데이터
-            /// </summary>
-            public static string RawData = string.Empty;
-            /// <summary>
-            /// 엔터가 제거된 클립보드 데이터
-            /// </summary>
-            public static string EnterRemoveData = string.Empty;
-        }
+    {   
         /// <summary>
         /// 버튼텍스트
         /// </summary>
@@ -28,20 +12,24 @@ namespace ClipboardEnterRemover
             public const string StartText = "중지";
             public const string StopText = "시작하기";
         }
-
-        System.Threading.Thread? _t;
-        bool _isStart = false;
-        bool _thisFormClosed = false;
+        string title = "클립보드 엔터 제거기";
 
         NotifyIcon _notifyIcon = new NotifyIcon();
         
         public MainForm()
         {
             InitializeComponent();
+
+            Program.deFunction.ListLogging = (title, content) => { Logging(title, content); };
+            Program.deFunction.MainProgressBarVisible = (Visible) => { ProgressBarVisible(Visible); };
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            System.Diagnostics.FileVersionInfo fvi = System.Diagnostics.FileVersionInfo.GetVersionInfo(assembly.Location);
+            this.Text = string.Format("{0} [v{1}]", title, fvi.FileVersion);
+
             _notifyIcon.Icon = this.Icon;
             _notifyIcon.Visible = true;
             _notifyIcon.Text = this.Text;
@@ -62,15 +50,15 @@ namespace ClipboardEnterRemover
                 if(MessageBox.Show("클립보드 엔터 제거기를 종료하시겠습니까?","close", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     ClipboardMonitor.Stop();
-                    _thisFormClosed = true;
+                    Program.MainFormClosed = true;
                     this.Close();
                 }
             };
 
             btnStart.Click += (o, i) =>
             {
-                _isStart = !_isStart;
-                if (_isStart)
+                Program.BackgrndRun = !Program.BackgrndRun;
+                if (Program.BackgrndRun)
                 {
                     btnStart.Text = ButtonName.StartText;
                 }
@@ -79,58 +67,6 @@ namespace ClipboardEnterRemover
                     btnStart.Text = ButtonName.StopText;
                 }
             };
-
-            //클립보드 엔터제거기 실행 상태 디스플레이용 쓰레드
-            _t = new Thread(new ThreadStart(() => {
-                while (true)
-                {
-                    if (_thisFormClosed)
-                        return;
-
-                    if (_isStart)
-                    {
-                        if (ClipboardMonitor.MonitorStatus == ClipboardMonitor.Status.Stop)
-                        {
-                            ClipboardMonitor.OnClipboardChange += (format, data) =>
-                            {
-                                SetClipboard((string)data);
-                            };
-                            ClipboardMonitor.Start();
-                        }
-                        if (prbStatus.InvokeRequired)
-                        {
-                            prbStatus.Invoke(new MethodInvoker(() =>
-                            {
-                                prbStatus.Show();
-                            }));
-                        }
-                        else
-                        {
-                            prbStatus.Show();
-                        }
-                    }
-                    else
-                    {
-                        if (ClipboardMonitor.MonitorStatus == ClipboardMonitor.Status.Start)
-                            ClipboardMonitor.Stop();
-
-                        if (prbStatus.InvokeRequired)
-                        {
-                            prbStatus.Invoke(new MethodInvoker(() =>
-                            {
-                                prbStatus.Hide();
-                            }));
-                        }
-                        else
-                        {
-                            prbStatus.Hide();
-                        }
-                    }
-                    Thread.Sleep(500);
-                }
-            }));
-            _t.IsBackground = true;
-            _t.Start();
 
             //프로그레스바 설정
             prbStatus.Style = ProgressBarStyle.Marquee;
@@ -145,6 +81,8 @@ namespace ClipboardEnterRemover
                     this.Hide();
                 }
             };
+
+            Program.BacgroundStart();
         }
 
         // "X" 버튼 비활성화
@@ -160,61 +98,42 @@ namespace ClipboardEnterRemover
         }
 
         /// <summary>
-        /// 클립보드의 DATA를 엔터 값을 제거한 값으로 대체시킨다.
+        /// 리스트 박스에 로그를 표시한다.
         /// </summary>
-        /// <param name="data"></param>
-        void SetClipboard(string data)
+        /// <param name="title">제목</param>
+        /// <param name="content">내용</param>
+        void Logging(string title, string content)
         {
-            if (string.IsNullOrEmpty(data))
-                return;
-            if (ClipboardData.RawData == data)
-                return;
-
-            ClipboardData.RawData = data;
-            ClipboardData.EnterRemoveData = RemoveText(data, _RemoveTaget);
             if (lbxLog.InvokeRequired)
-                lbxLog.Invoke(new MethodInvoker(() => {
-                    lbxLog.Items.Add(string.Format("{0}-catch data : [{1}]", DateTime.Now.ToString("HH:mm:ss"), data));
-                    lbxLog.SelectedIndex = lbxLog.Items.Count - 1;
-                }));
+                lbxLog.Invoke(new MethodInvoker(() => { Logging(title, content); }));
             else
             {
-                lbxLog.Items.Add(string.Format("{0}-catch data : [{1}]", DateTime.Now.ToString("HH:mm:ss"), data));
+                lbxLog.Items.Add(string.Format("{0}-{1} : [{2}]", DateTime.Now.ToString("HH:mm:ss"), title, content));
+                if (lbxLog.Items.Count > 30)
+                    lbxLog.Items.RemoveAt(0);
                 lbxLog.SelectedIndex = lbxLog.Items.Count - 1;
-            }
-
-            try
-            {
-                Clipboard.SetText(ClipboardData.EnterRemoveData);
-            }
-            catch (ExternalException ex)
-            {
-                if (lbxLog.InvokeRequired)
-                    lbxLog.Invoke(new MethodInvoker(() => {
-                        lbxLog.Items.Add(string.Format("{0}-Error : [{1}]", DateTime.Now.ToString("HH:mm:ss"), ex.Message));
-                        lbxLog.SelectedIndex = lbxLog.Items.Count - 1;
-                    }));
-                else
-                {
-                    lbxLog.Items.Add(string.Format("{0}-Error : [{1}]", DateTime.Now.ToString("HH:mm:ss"), ex.Message));
-                    lbxLog.SelectedIndex = lbxLog.Items.Count - 1;
-                }
             }
         }
 
         /// <summary>
-        /// 엔터값 등 제거할 값을 제거하고 반환한다.
+        /// 프로그레스바 진행상태 표시 여부
         /// </summary>
-        /// <param name="text"></param>
-        /// <param name="oldvalues"></param>
-        /// <returns></returns>
-        string RemoveText(string text, string[] oldvalues)
+        /// <param name="visible">visible</param>
+        void ProgressBarVisible(bool visible)
         {
-            foreach(string val in oldvalues)
+            if (prbStatus.InvokeRequired)
             {
-                text = text.Replace(val, string.Empty);
+                prbStatus.Invoke(new MethodInvoker(() => { 
+                    ProgressBarVisible(visible); 
+                }));
             }
-            return text;
+            else
+            {
+                if (visible)
+                    prbStatus.Show();
+                else
+                    prbStatus.Hide();
+            }
         }
     }
 }
