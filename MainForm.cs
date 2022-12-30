@@ -3,7 +3,9 @@ using System.Runtime.InteropServices;
 namespace ClipboardEnterRemover
 {
     public partial class MainForm : Form
-    {   
+    {
+        public static progressBarVisible? MainProgressBarVisible;
+        public static listLogging? ListLogging;
         /// <summary>
         /// 버튼텍스트
         /// </summary>
@@ -12,23 +14,40 @@ namespace ClipboardEnterRemover
             public const string StartText = "중지";
             public const string StopText = "시작하기";
         }
-        string title = "클립보드 엔터 제거기";
 
-        NotifyIcon _notifyIcon = new NotifyIcon();
-        
+        readonly NotifyIcon _notifyIcon = new();
+
         public MainForm()
         {
             InitializeComponent();
 
-            Program.deFunction.ListLogging = (title, content) => { Logging(title, content); };
-            Program.deFunction.MainProgressBarVisible = (Visible) => { ProgressBarVisible(Visible); };
+            ListLogging = (title, content) => 
+            {
+                // 리스트 박스에 로그를 표시한다.
+                lbxLog.Invoke(() => 
+                {
+                    lbxLog.Items.Add(string.Format("{0}-{1} : [{2}]", DateTime.Now.ToString("HH:mm:ss"), title, content));
+                    if (lbxLog.Items.Count > 30)
+                        lbxLog.Items.RemoveAt(0);
+                    lbxLog.SelectedIndex = lbxLog.Items.Count - 1;
+                });
+            };
+            MainProgressBarVisible = (visible) =>
+            {
+                // 프로그레스바 진행상태 표시 여부
+                prbStatus.Invoke(() => 
+                {
+                    if (visible)
+                        prbStatus.Show();
+                    else
+                        prbStatus.Hide();
+                });
+            };
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
-            System.Diagnostics.FileVersionInfo fvi = System.Diagnostics.FileVersionInfo.GetVersionInfo(assembly.Location);
-            this.Text = string.Format("{0} [v{1}]", title, fvi.FileVersion);
+            this.Text = Program.ProgramTitle;
 
             _notifyIcon.Icon = this.Icon;
             _notifyIcon.Visible = true;
@@ -39,20 +58,12 @@ namespace ClipboardEnterRemover
                 this.Visible = true;
                 this.WindowState = FormWindowState.Normal;
             };
+
             this.showToolStripMenuItem.Click += (o, i) => 
             {
                 this.ShowInTaskbar = true;
                 this.Visible = true;
                 this.WindowState = FormWindowState.Normal;
-            };
-            this.exitToolStripMenuItem.Click += (o, i) =>
-            {
-                if(MessageBox.Show("클립보드 엔터 제거기를 종료하시겠습니까?","close", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-                    ClipboardMonitor.Stop();
-                    Program.MainFormClosed = true;
-                    this.Close();
-                }
             };
 
             btnStart.Click += (o, i) =>
@@ -82,7 +93,17 @@ namespace ClipboardEnterRemover
                 }
             };
 
-            Program.BacgroundStart();
+            this.exitToolStripMenuItem.Click += (o, i) =>
+            {
+                if (MessageBox.Show("클립보드 엔터 제거기를 종료하시겠습니까?", "close", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    ClipboardMonitor.Stop();
+                    Program.MainFormClosed = true;
+                    this.Close();
+                }
+            };
+
+            //Program.BacgroundStart();
         }
 
         // "X" 버튼 비활성화
@@ -94,45 +115,6 @@ namespace ClipboardEnterRemover
                 CreateParams myCp = base.CreateParams;
                 myCp.ClassStyle = myCp.ClassStyle | CP_NOCLOSE_BUTTON;
                 return myCp;
-            }
-        }
-
-        /// <summary>
-        /// 리스트 박스에 로그를 표시한다.
-        /// </summary>
-        /// <param name="title">제목</param>
-        /// <param name="content">내용</param>
-        void Logging(string title, string content)
-        {
-            if (lbxLog.InvokeRequired)
-                lbxLog.Invoke(new MethodInvoker(() => { Logging(title, content); }));
-            else
-            {
-                lbxLog.Items.Add(string.Format("{0}-{1} : [{2}]", DateTime.Now.ToString("HH:mm:ss"), title, content));
-                if (lbxLog.Items.Count > 30)
-                    lbxLog.Items.RemoveAt(0);
-                lbxLog.SelectedIndex = lbxLog.Items.Count - 1;
-            }
-        }
-
-        /// <summary>
-        /// 프로그레스바 진행상태 표시 여부
-        /// </summary>
-        /// <param name="visible">visible</param>
-        void ProgressBarVisible(bool visible)
-        {
-            if (prbStatus.InvokeRequired)
-            {
-                prbStatus.Invoke(new MethodInvoker(() => { 
-                    ProgressBarVisible(visible); 
-                }));
-            }
-            else
-            {
-                if (visible)
-                    prbStatus.Show();
-                else
-                    prbStatus.Hide();
             }
         }
     }

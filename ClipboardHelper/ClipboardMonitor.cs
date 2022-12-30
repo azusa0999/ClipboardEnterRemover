@@ -17,8 +17,7 @@ namespace ClipboardEnterRemover
             ClipboardWatcher.Start();
             ClipboardWatcher.OnClipboardChange += (format, data) =>
             {
-                if (OnClipboardChange != null)
-                    OnClipboardChange(format, data);
+                OnClipboardChange?.Invoke(format, data);
             };
         }
 
@@ -138,8 +137,7 @@ namespace ClipboardEnterRemover
                 if (data == null || format == null)
                     return;
 
-                if (OnClipboardChange != null)
-                    OnClipboardChange((ClipboardFormat)format, data);
+                OnClipboardChange?.Invoke((ClipboardFormat)format, data);
             }
         }
     }

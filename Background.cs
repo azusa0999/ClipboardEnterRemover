@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.InteropServices;
 
 namespace ClipboardEnterRemover
 {
     internal class Background
     {
-        System.Threading.Thread? _t;
+        readonly System.Threading.Thread? _t;
         public Background()
         {
             //클립보드 엔터제거기 실행 상태 디스플레이용 쓰레드
-            _t = new Thread(new ThreadStart(() => {
+            _t = new Thread(() => {
+                Thread.Sleep(1000);
                 while (true)
                 {
                     if (Program.MainFormClosed)
@@ -23,23 +19,19 @@ namespace ClipboardEnterRemover
                     {
                         ClipboardMonitor.OnClipboardChange += (format, data) =>
                         {
-                            SetClipboard((string)data);
+                            Background.SetClipboard((string)data);
                         };
                         ClipboardMonitor.Start();
-                        Program.deFunction.MainProgressBarVisible(true);
+                        MainForm.MainProgressBarVisible?.Invoke(true);
                     }
                     else if (!Program.BackgrndRun && ClipboardMonitor.MonitorStatus == ClipboardMonitor.Status.Start)
                     {
                         ClipboardMonitor.Stop();
-                        Program.deFunction.MainProgressBarVisible(false);
+                        MainForm.MainProgressBarVisible?.Invoke(false);
                     }
                     Thread.Sleep(500);
                 }
-            }));
-        }
-
-        public void Start()
-        {
+            });
             _t.IsBackground = true;
             _t.Start();
         }
@@ -48,7 +40,7 @@ namespace ClipboardEnterRemover
         /// 클립보드의 DATA를 엔터 값을 제거한 값으로 대체시킨다.
         /// </summary>
         /// <param name="data"></param>
-        void SetClipboard(string data)
+        static void SetClipboard(string data)
         {
             if (string.IsNullOrEmpty(data))
                 return;
@@ -57,7 +49,7 @@ namespace ClipboardEnterRemover
 
             Program.ClipboardData.RawData = data;
             Program.ClipboardData.EnterRemoveData = TextRemover.RemoveText(data);
-            Program.deFunction.ListLogging("catch data", data);
+            MainForm.ListLogging?.Invoke("catch data", data);
 
             try
             {
@@ -65,11 +57,11 @@ namespace ClipboardEnterRemover
             }
             catch (ExternalException ex)
             {
-                Program.deFunction.ListLogging("ClipboardError", ex.Message);
+                MainForm.ListLogging?.Invoke("ClipboardError", ex.Message);
             }
             catch (Exception ex)
             {
-                Program.deFunction.ListLogging("Exception", ex.Message);
+                MainForm.ListLogging?.Invoke("Exception", ex.Message);
             }
         }
     }

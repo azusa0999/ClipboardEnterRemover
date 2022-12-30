@@ -2,9 +2,7 @@ namespace ClipboardEnterRemover
 {
     internal static class Program
     {
-        public static DelegateFunction deFunction = new DelegateFunction();
-        public static MainForm main = new MainForm();
-        public static Background back = new Background();
+        public static Background back = new();
         /// <summary>
         /// 제거기 자신이 관리하는 클립보드 저장 데이터
         /// </summary>
@@ -19,10 +17,7 @@ namespace ClipboardEnterRemover
             /// </summary>
             public static string EnterRemoveData = string.Empty;
         }
-        public static void BacgroundStart()
-        {
-            back.Start();
-        }
+
         /// <summary>
         /// 메인 종료 여부
         /// </summary>
@@ -32,6 +27,18 @@ namespace ClipboardEnterRemover
         /// </summary>
         public static bool BackgrndRun { get; set; }
         /// <summary>
+        /// 프로그램의 타이틀명
+        /// </summary>
+        public static string ProgramTitle
+        {
+            get
+            {
+                System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
+                System.Diagnostics.FileVersionInfo fvi = System.Diagnostics.FileVersionInfo.GetVersionInfo(assembly.Location);
+                return string.Format("{0} [v{1}]", "클립보드 엔터 제거기", fvi.FileVersion);
+            }
+        }
+        /// <summary>
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
@@ -40,7 +47,7 @@ namespace ClipboardEnterRemover
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(main);
+            Application.Run(new MainForm());
         }
     }
 }
